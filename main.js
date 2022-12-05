@@ -1,244 +1,61 @@
-const url = "http://localhost:3000/characters";
- function fetchBooks() {
-   // To pass the tests, don't forget to return your fetch!
+var ul = document.querySelector('.list-items')
+const singleItemUi = document.querySelector('.animal-detail')
+const animalName = document.querySelector('#name')
+const animalVotes = document.querySelector('#votes')
+const animalPicture = document.querySelector('#pic')
+const backToList = document.querySelector('.back')
+const addAnimalVotes = document.querySelector('.add-votes')
+const animalId = document.querySelector('.anime-id')
+// animalId.classList.add('hide')
+//go back to animals list
+backToList.addEventListener('click', ()=>{
+  showAllAnimals()
+})
+//add animal votes
+addAnimalVotes.addEventListener('click', ()=>{
+  let votesString = animalVotes.innerHTML;
+  let numVotes = parseInt(votesString.substring(7),10);
+  let selectedAnimalId = parseInt(animalId.innerHTML.substring(11),10);
+   addVotes(selectedAnimalId,numVotes);
+})
+const fetchData = (url) => {
    fetch(url)
-     .then((resp) => resp.json())
-     .then((characters) => renderAnimals(characters));
-   return renderAnimals;
- }
- 
- function renderAnimals(characters) {
-   const box = document.getElementById("box")
- const form = document.createElement('div');
- form.innerHTML = `
- <div class="container">
-       <form method="post">
-         <label for="animalname">Animal Name</label>
-         <input type="text" id ="animalname"placeholder="Animal name..">
-     
-         <label for="url">Image Url</label>
-         <input type="text" id = "url" placeholder="image url">
-     
-        
-         <input type="submit" value="Submit">
-       </form>
-     </div>
- `
-   const main = document.querySelector("main");
-   characters.forEach((animal) => {
-     const h2 = document.createElement("h2");
-     h2.className = "li";
-     h2.addEventListener("click", () => {
-       if (animal.id === 1) {
-         getMrCute();
-       } else if (animal.id === 2) {
-         getMxMonkey();
-       } else if (animal.id === 3) {
-         getMsZebra();
-       } else if (animal.id === 4) {
-         getDrLion();
-       } else if (animal.id === 5) {
-         getMmePanda();
-       }
-     });
-     
-     h2.innerHTML = animal.name;
-     main.appendChild(h2);
-     main.appendChild(form);
-     
-     
-   });
- }
- 
- //getting Mr Cute
- function getMrCute() {
-   fetch(url)
-     .then((resp) => resp.json())
-     .then((result) => {
-       const obj = result[0];
-       const card = document.getElementsByClassName("demo");
-       let button = document.createElement("button");
-       button.addEventListener("click", deleteBox);
-       button.id = "back";
-       button.textContent = "BACK";
-       let list = document.createElement("div");
-       list.className = "card";
-       list.innerHTML = `
-       <img id="pic" src="${obj.image}"/>
-     <div class="details">
-      <h2 id = "name">${obj.name}</h2>
-      <h2 id= "totalvotes" >Votes:  ${obj.votes}</h2>
-      <div id = "votes">
-      <button onclick="tallyingVotes(${obj.votes})" id = "btn">VOTE</button>
-     </div>
-     </div>
-     `;
- 
-       document.querySelector("#demo").appendChild(list);
-       list.appendChild(button);
-     });
-   let e = document.querySelector("main");
-   let child = e.lastElementChild;
-   while (child) {
-     e.removeChild(child);
-     child = e.lastElementChild;
-   }
- }
- 
- //getting Mx Monkey
- function getMxMonkey() {
-   fetch(url)
-     .then((resp) => resp.json())
-     .then((result) => {
-       const obj = result[1];
-       const card = document.getElementsByClassName("demo");
-       let button = document.createElement("button");
-       button.addEventListener("click", deleteBox);
-       button.id = "back";
-       button.textContent = "BACK";
-       let list = document.createElement("div");
-       list.className = "card";
-       list.innerHTML = `
-       <img id="pic" src="${obj.image}"/>
-       <div class="details">
-        <h2 id = "name">${obj.name}</h2>
-        <h2 id= "totalvotes" >Votes:  ${obj.votes}</h2>
-        <div id = "votes">
-        <button onclick="tallyingVotes(${obj.votes})" id = "btn">VOTE</button>
-       </div>
-       </div>
-     `;
-       document.querySelector("#demo").appendChild(list);
-       list.appendChild(button);
-     });
-   let e = document.querySelector("main");
-   let child = e.lastElementChild;
-   while (child) {
-     e.removeChild(child);
-     child = e.lastElementChild;
-   }
- }
- 
- //getting Ms Zebra
- function getMsZebra() {
-   fetch(url)
-     .then((resp) => resp.json())
-     .then((result) => {
-       const obj = result[2];
-       const card = document.getElementsByClassName("demo");
-       let button = document.createElement("button");
-       button.addEventListener("click", deleteBox);
-       button.id = "back";
-       button.textContent = "BACK";
-       let list = document.createElement("div");
-       list.className = "card";
-       list.innerHTML = `
-       <img id="pic" src="${obj.image}"/>
-     <div class="details">
-      <h2 id = "name">${obj.name}</h2>
-      <h2 id= "totalvotes" >Votes:  ${obj.votes}</h2>
-      <div id = "votes">
-      <button onclick="tallyingVotes(${obj.votes})" id = "btn">VOTE</button>
-     </div>
-     </div>
-     `;
-       document.querySelector("#demo").appendChild(list);
-       list.appendChild(button);
-     });
-   let e = document.querySelector("main");
-   let child = e.lastElementChild;
-   while (child) {
-     e.removeChild(child);
-     child = e.lastElementChild;
-   }
- }
- 
- //getting Dr Lion
- function getDrLion() {
-   fetch(url)
-     .then((resp) => resp.json())
-     .then((result) => {
-       const obj = result[3];
-       const card = document.getElementsByClassName("demo");
-       let button = document.createElement("button");
-       button.addEventListener("click", deleteBox);
-       button.id = "back";
-       button.textContent = "BACK";
-       let list = document.createElement("div");
-       list.className = "card";
-       list.innerHTML = `
-       <img id="pic" src="${obj.image}"/>
-       <div class="details">
-        <h2 id = "name">${obj.name}</h2>
-        <h2 id= "totalvotes" >Votes:  ${obj.votes}</h2>
-        <div id = "votes">
-        <button onclick="tallyingVotes(${obj.votes})" id = "btn">VOTE</button>
-       </div>
-       </div>
-     `;
-       document.querySelector("#demo").appendChild(list);
-       list.appendChild(button);
-     });
-   let e = document.querySelector("main");
-   let child = e.lastElementChild;
-   while (child) {
-     e.removeChild(child);
-     child = e.lastElementChild;
-   }
- }
- 
- //getting Mme Panda
- function getMmePanda() {
-   fetch(url)
-     .then((resp) => resp.json())
-     .then((result) => {
-       const obj = result[4];
-       const card = document.getElementsByClassName("demo");
-       let button = document.createElement("button");
-       button.addEventListener("click", deleteBox);
-       button.id = "back";
-       button.textContent = "BACK";
-       let list = document.createElement("div");
-       list.className = "card";
-       list.innerHTML = `
-       <img id="pic" src="${obj.image}"/>
-     <div class="details">
-      <h2 id = "name">${obj.name}</h2>
-      <h2 id= "totalvotes" >Votes:  ${obj.votes}</h2>
-      <div id = "votes">
-      <button onclick="tallyingVotes(${obj.votes})" id = "btn">VOTE</button>
-     </div>
-     </div>
-     `;
-       document.querySelector("#demo").appendChild(list);
-       list.appendChild(button);
-     });
-   let e = document.querySelector("main");
-   let child = e.lastElementChild;
-   while (child) {
-     e.removeChild(child);
-     child = e.lastElementChild;
-   }
- }
- 
- function deleteBox(e) {
-   e.target.parentNode.remove();
-   return fetchBooks();
- }
- 
- function tallyingVotes(obj) {
-     fetch(url)
-     .then((resp) => resp.json())
-     .then((result) => {
-   let text = document.querySelector("#totalvotes")
-   text = `Votes: ${obj + 1}`;
-   return document.querySelector("#totalvotes").textContent = text;})
- }
- 
- 
- 
- 
- document.addEventListener("DOMContentLoaded", function () {
-   fetchBooks();
-   tallyingVotes();
- });
+      .then((response) => response.json())
+      .then(function(json) {
+        displayData(json)
+      });
+  };
+  const displayData = (data)=>{
+    data.map((item)=>{
+      createListItemTemplate(item)
+    })
+  }
+  const createListItemTemplate=(item)=>{
+    const listItem = document.createElement('li')
+    listItem.innerHTML = item.name
+    listItem.addEventListener('click',()=>{
+      showSingleAnimal(item)
+    })
+    ul.appendChild(listItem)
+  }
+  const showSingleAnimal = (animal)=>{
+    ul.classList.add('hide')
+    singleItemUi.classList.remove('hide')
+    //set the animal details
+    animalName.innerHTML = animal.name;
+    animalVotes.innerHTML = 'Votes : ' + animal.votes;
+    animalId.innerHTML = 'Animal ID : ' + animal.id;
+    animalPicture.src = animal.image
+  }
+  const showAllAnimals = ()=>{
+    ul.classList.remove('hide')
+    singleItemUi.classList.add('hide')
+  }
+  const addVotes = (id,votes)=>{
+    //increment votes by 1 and update the votes ui
+    votes++
+    //update ui
+    animalVotes.innerHTML =  'Votes : ' + votes
+  }
+  fetchData('http://localhost:3000/characters')
+  console.log('Votes are : '+ localStorage.getItem('votesContainer'))
