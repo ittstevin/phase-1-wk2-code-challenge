@@ -18,6 +18,7 @@ addAnimalVotes.addEventListener('click', ()=>{
   let selectedAnimalId = parseInt(animalId.innerHTML.substring(11),10);
    addVotes(selectedAnimalId,numVotes);
 })
+//fetches data from db.json
 const fetchData = (url) => {
    fetch(url)
       .then((response) => response.json())
@@ -30,6 +31,7 @@ const fetchData = (url) => {
       createListItemTemplate(item)
     })
   }
+  //creates a list in the html file
   const createListItemTemplate=(item)=>{
     const listItem = document.createElement('li')
     listItem.innerHTML = item.name
@@ -47,6 +49,7 @@ const fetchData = (url) => {
     animalId.innerHTML = 'Animal ID : ' + animal.id;
     animalPicture.src = animal.image
   }
+  //ability to go back
   const showAllAnimals = ()=>{
     ul.classList.remove('hide')
     singleItemUi.classList.add('hide')

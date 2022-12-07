@@ -3,6 +3,12 @@
 
 This is a pretty straight foward program that lets you vote for the cutest animal in the list.In The program, there is also a feature of resetting the votes if it is necessary.
 
+This program consists of;
+- HTML file
+- CSS file
+- javaScript file 
+- json file
+
 # Getting Started
 
 If you haven't already, fork and clone this lesson into your local environment.
